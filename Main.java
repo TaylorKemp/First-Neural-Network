@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -6,44 +7,38 @@ import java.io.IOException;
 
 public class Main {
 	public static void main(String[] args){
-		int[] sizes = {2, 2};
-		//IDXReader.readImage("trainingImages/train-images-idx3-ubyte.gz");
+		int[] sizes = {52, 15, 10};
 		Network net = new Network(sizes);
-		double[] array = {0.0, 0.0};
-		net.evaluate(array);
-		double[][] inputData = new double[4][2];
-		double[][] expectedOutput = new double[4][2];
-		double[] result = null;
-		inputData[0][0] = 1.0;
-		inputData[1][0] = 0.0;
-		inputData[2][0] = 0.0;
-		inputData[3][0] = 0.0;
-		
-		inputData[0][1] = 1.0;
-		inputData[1][1] = 0.0;
-		inputData[2][1] = 0.0;
-		inputData[3][1] = 0.0;
-		expectedOutput[0][0] = 1.0;
-		expectedOutput[1][0] = 0.0;
-		expectedOutput[2][0] = 0.0;
-		expectedOutput[3][0] = 0.0;
-		
-		expectedOutput[0][1] = 0.0;
-		expectedOutput[1][1] = 1.0;
-		expectedOutput[2][1] = 1.0;
-		expectedOutput[3][1] = 1.0;
-		
-		result = net.evaluate(array);
-		System.out.println("chance yes:" + result[0]);
-		System.out.println("chance no:" + result[1]);
-		for(int i = 0; i < 1000000; i++){
-			net.backPropogation(inputData[1], expectedOutput[1]);
+		double[][] labels = new double[25010][10];
+		double[][] hands = null;
+		double[] hand = new double[52];
+		hand[0] = 1.0;
+		hand[12] = 1.0;
+		hand[16] = 1.0;
+		hand[15] = 1.0;
+		hand[11] = 1.0;
+		double[] answer = net.evaluate(hand);
+		System.out.println("before learning");
+		for(int i = 0; i < answer.length; i++){
+			System.out.println(i + ":" + answer[i]);
 		}
+		System.out.println();
+		int batchSize = 5;
+		hands = TextReader.read("trainingImages/pokerTrainData.txt", labels);
 		
-		result = net.evaluate(inputData[1]);
-		System.out.println("chance yes:" + result[0]);
-		System.out.println("chance no:" + result[1]);
-		System.out.println("End of Program");
+		net.SGD(hands, labels, batchSize);
+		hand[0] = 1.0;
+		hand[1] = 1.0;
+		hand[8] = 1.0;
+		hand[3] = 1.0;
+		hand[4] = 1.0;
+		answer = net.evaluate(hand);
+		System.out.println("after learning");
+		for(int i = 0; i < answer.length; i++){
+			System.out.println(i + ":" + answer[i]);
+		}
+		System.out.println("program end");
+		
 	}
 				
 }
