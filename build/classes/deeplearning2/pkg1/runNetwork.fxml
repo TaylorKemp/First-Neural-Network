@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Screen?>
+<?scenebuilder-stylesheet background.css?>
+<?import java.net.URL?>
+
+<GridPane fx:id="window" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400" prefWidth="600" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="deeplearning2.pkg1.RunNetworkController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="${window.width}" minWidth="10.0" prefWidth="${window.width/3}" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="${window.width}" minWidth="10.0" prefWidth="${window.width*2/3}" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints fx:id="firstRow" maxHeight="${window.height*5/6}" minHeight="10.0" prefHeight="${window.height*5/6}" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="${window.height/6}" minHeight="10.0" prefHeight="${window.height/6}" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Button fx:id="run" styleClass="runButton" mnemonicParsing="false" text="Run" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="10.0" right="10.0" />
+         </GridPane.margin>
+      </Button>
+      <VBox fx:id="paramBox" prefHeight="${firstRow.height}" prefWidth="${window.width/3}">
+         <children>
+            <Label fx:id="hyperParameterslabel" alignment="CENTER" prefHeight="17.0" prefWidth="223.0" text="Network Hyper Parameters">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="learnRatelabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="199.0" text="Learning Rate">
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="learningRate" alignment="CENTER" promptText="Learning Rate">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="epochsLabel" alignment="CENTER" prefHeight="17.0" prefWidth="210.0" text="Training Epochs">
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="epoch" alignment="CENTER" promptText="Training Epochs">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="minibatchLabel" alignment="CENTER" prefHeight="17.0" prefWidth="197.0" text="Minibatch Size">
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="miniBatchSize" alignment="CENTER" promptText="Training Minibatch Size">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </TextField>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="196.0" text="Test Sample Size">
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="sampleSize" promptText="Test Sample Size">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </TextField>
+            <ComboBox fx:id="costFunction" prefHeight="25.0" prefWidth="${paramBox.width}" promptText="Cost Function">
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
+            </ComboBox>
+         </children>
+      </VBox>
+      <LineChart fx:id="graph" title="Network Accuracy" GridPane.columnIndex="1">
+        <xAxis>
+          <NumberAxis label="MiniBatch Number" side="BOTTOM" fx:id="xAxis" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yAxis" label="Accuracy On Sample" side="LEFT" upperBound="1.00" />
+        </yAxis>
+      </LineChart>
+      <ProgressBar fx:id="progressBar" prefHeight="23.0" prefWidth="170.0" progress="0.0" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin></ProgressBar>
+      <Label fx:id="progressLabel" text="Loading Test Data" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      <Label fx:id="loadTrainingData" text="Loading Training Data" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <stylesheets><URL value="@background.css"/></stylesheets>
+   <fx:define><Screen fx:factory="getPrimary" fx:id="screen"/></fx:define>
+</GridPane>

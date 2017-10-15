@@ -1,0 +1,52 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 6, 2017, 3:25:07 PM
+    Author     : tkemp
+*/
+
+.background {
+    -fx-background-image: url("deepLearningBackground.jpg");
+    -fx-background-position: center center;
+    -fx-background-size: cover, auto;
+}
+
+.overlay {
+    -fx-background-color: rgba(22, 27, 29, 0.4);
+    -fx-background-position: center, center;
+    -fx-padding: 0;
+}
+
+.layout {
+    -fx-background-position: center, center;
+}
+
+.title {
+    -fx-text-fill: rgba(250, 250, 250, 1.0);
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica", sans-serif;
+    -fx-font-size: 30;
+}
+
+.button {
+    -fx-background-color: rgba(250, 250, 250, 1.0);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+.runButton {
+    -fx-background-color: green;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+}
+
+.pane {
+    -fx-background-color: lightseagreen;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
